@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".activity.Home">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:text="跑吗"
+                android:textSize="48sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:text="不跑不如自己跑～"
+                android:textSize="24sp"
+                android:id="@+id/home.log" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="64sp"
+                android:layout_marginTop="18sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp">
+
+                <TextView
+                    android:id="@+id/home.speed.text1"
+                    android:layout_width="64sp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="时速"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="84sp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|end"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="米每秒"
+                    android:id="@+id/home.speed.text2"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/home.speed.text1"
+                    android:layout_toStartOf="@id/home.speed.text2"
+                    android:maxLines="1"
+                    android:maxLength="8"
+                    android:textColor="#fff"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="#c666"
+                    android:textSize="18sp"
+                    android:hint="跑步速度"
+                    android:id="@+id/home.speed.edit"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="64sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/home.deltaT.text1"
+                    android:layout_width="64sp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="间隔"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="84sp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|end"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="毫秒"
+                    android:id="@+id/home.deltaT.text2"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/home.deltaT.text1"
+                    android:layout_toStartOf="@id/home.deltaT.text2"
+                    android:maxLines="1"
+                    android:maxLength="8"
+                    android:textColor="#fff"
+                    android:inputType="number"
+                    android:textColorHint="#c666"
+                    android:textSize="18sp"
+                    android:hint="定位更新时间间隔"
+                    android:id="@+id/home.deltaT.edit"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:text="如果你觉得跑的太慢了，\n可以改一下&quot;时速&quot;。\n不建议更改第二个参数。" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="64sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/home.map.text1"
+                    android:layout_width="64sp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="地图"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/home.map.editBtn"
+                    android:layout_width="84sp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/auth_btn_background"
+                    android:gravity="center"
+                    android:text="修改"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/home.map.mapName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/home.map.editBtn"
+                    android:layout_toEndOf="@id/home.map.text1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="无"
+                    android:textColor="#fff"
+                    android:textColorHint="#c666"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="16sp"
+                android:text="启动"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/home.switch.on"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="16sp"
+                android:text="停止"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/home.switch.off"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:text="如果程序在运行过程中会失效，\n请点击下面这个按钮，进行一些操作。" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="8sp"
+                android:text="设置白名单"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/home.requestWhiteList"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:text="该按钮会启动手机的智能管理器。\n要在那里想办法把本app加入白名单。" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="16sp"
+                android:text="恢复默认参数"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/home.restoreParams"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

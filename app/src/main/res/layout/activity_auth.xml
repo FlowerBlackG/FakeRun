@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".activity.Auth">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:id="@+id/auth.form">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:text="身份验证"
+                android:textSize="48sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:layout_marginTop="16sp"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="#fff"
+                android:hint="进入码"
+                android:textColorHint="#c666"
+                android:maxLines="2"
+                android:maxLength="36"
+                android:id="@+id/auth.key"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="28sp"
+                android:text="启动"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/auth.confirm"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:text="本app正常运行的前提是\n你已经将本app设置为\n系统级模拟定位应用。\n不会操作？戳下面的按钮。" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="16sp"
+                android:text="高级权限"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/auth.tutor.addMockPermission"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/auth.disclaimerShow"
+                    android:gravity="center"
+                    android:text="&quot;启动&quot;即表明你已理解"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:layout_width="120sp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:text="免责声明"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:background="@drawable/auth_btn_background"
+                    android:id="@+id/auth.disclaimerShow"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:text="V0"
+        android:textSize="16sp"
+        android:id="@+id/auth.version"/>
+    
+    <ProgressBar
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/auth.loading"/>
+
+</RelativeLayout>
