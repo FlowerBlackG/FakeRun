@@ -8,7 +8,8 @@
         android:icon="@drawable/fakerun_logo"
         android:label="@string/app_name"
         android:theme="@style/Theme.FakeRun.Main">
-        <activity android:name=".activity.Auth">
+        <activity android:name=".activity.Auth"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
