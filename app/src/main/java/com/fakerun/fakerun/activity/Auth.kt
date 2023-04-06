@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -114,6 +115,12 @@ class Auth : Activity() {
                     .create()
                     .show()
         }
+
+        findViewById<Button>(R.id.auth_supportAuthor).setOnClickListener {
+            val intent = Intent(this, SupportAuthor::class.java)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
     }
 
     private fun showVersionInfo() {
@@ -149,6 +156,36 @@ class Auth : Activity() {
 
         if (!isIgnoringBatteryOptimizations()) {
             requestIgnoreBatteryOptimizations()
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            fun requirePostNotificationPermission() = requestPermissions(arrayOf(
+                Manifest.permission.POST_NOTIFICATIONS
+            ), 0)
+
+            val POST_MSG_FIRED_KEY = "___post msg request fired"
+
+            if ( ! sp.getBoolean(POST_MSG_FIRED_KEY, false)) {
+
+                // 发送通知权限。
+                AlertDialog.Builder(this)
+                    .setTitle("通知权限")
+                    .setMessage("跑吗需要在后台运行。安卓系统后台需要通知权限。请给我权限~~")
+                    .setCancelable(false)
+                    .setPositiveButton("好的") { dialog, which ->
+                        requirePostNotificationPermission()
+                    }
+                    .show()
+
+                sp.edit().putBoolean(POST_MSG_FIRED_KEY, true).apply()
+
+            } else {
+
+                requirePostNotificationPermission()
+
+            }
+
         }
 
     }

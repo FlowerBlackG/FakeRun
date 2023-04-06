@@ -3,6 +3,7 @@ package com.fakerun.fakerun.activity
 import android.app.Activity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import com.fakerun.fakerun.R
 import com.gardilily.common.view.card.InfoCard
@@ -14,7 +15,7 @@ class MapSelector : Activity() {
         setContentView(R.layout.activity_map_selector)
 
         loadMapData(
-            findViewById(R.id.mapSelector_list), findViewById(R.id.mapSelector_verShow)
+            findViewById(R.id.mapSelector_scrollView), findViewById(R.id.mapSelector_verShow)
         )
     }
 
@@ -33,15 +34,13 @@ class MapSelector : Activity() {
                 .setCardBackground(getDrawable(R.drawable.auth_btn_background))
                 .setHasIcon(true)
                 .setIcon(mapObj.getString("icon"))
-                .setIconTextSizeSp(32f)
+                .setIconTextSizeSp(24f)
                 .setHasEndMark(false)
-                .setInnerMarginStartSp(20f)
-                .setInnerMarginBetweenSp(20f)
-                .setOuterMarginTopSp(20f)
+                .setInnerMarginStartSp(16f)
+                .setInnerMarginBetweenSp(16f)
+                .setOuterMarginTopSp(16f)
                 .setOuterMarginBottomSp(0f)
                 .setTitle(mapObj.getString("name"))
-                .addInfo(InfoCard.Info("版本", mapObj.getInt("version").toString()))
-                .addInfo(InfoCard.Info("点集", mapObj.getJSONArray("points").length().toString()))
                 .addInfo(InfoCard.Info("介绍", mapObj.getString("desc")))
                 .build()
             card.setOnClickListener {

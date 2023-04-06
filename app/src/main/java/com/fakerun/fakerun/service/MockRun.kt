@@ -74,7 +74,7 @@ class MockRun : Service() {
         mNotiManager.createNotificationChannel(mNotificationChannel)
 
         val push = Intent(this, Home::class.java)
-        val contentIntent = PendingIntent.getActivity(this, 0, push, 0)
+        val contentIntent = PendingIntent.getActivity(this, 0, push, PendingIntent.FLAG_IMMUTABLE)
 
         mNotiBuilder = Notification.Builder(this, NOTI_CHANNEL_ID_BACKGROUND_SERVICE)
         mNotiBuilder.setContentTitle("跑吗后台服务")
@@ -89,6 +89,11 @@ class MockRun : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d("Service.MockRun", "Life Cycle: on Start Command")
+
+        if (intent == null) {
+            Log.e("onStartCommand", " intent is null.")
+            return START_STICKY
+        }
 
         when (intent!!.getIntExtra("action", -100)) {
             MOCKRUN_ACTION_RUN_START -> {
@@ -105,7 +110,7 @@ class MockRun : Service() {
                         Toast.makeText(this, "失败原因：\n$e", Toast.LENGTH_LONG).show()
                         updateNotiText("启动失败。请将本app设为系统模拟定位应用")
                         val push = Intent(this, Home::class.java)
-                        val contentIntent = PendingIntent.getActivity(this, 0, push, 0)
+                        val contentIntent = PendingIntent.getActivity(this, 0, push, PendingIntent.FLAG_IMMUTABLE)
                         val noti = Notification.Builder(this, NOTI_CHANNEL_ID_INSTANT_MSG)
                                 .setContentText("启动失败。请将本app设为系统模拟定位应用")
                                 .setSmallIcon(R.drawable.fakerun_noti_icon)
@@ -117,7 +122,7 @@ class MockRun : Service() {
                     }
                 } else {
                     val push = Intent(this, Home::class.java)
-                    val contentIntent = PendingIntent.getActivity(this, 0, push, 0)
+                    val contentIntent = PendingIntent.getActivity(this, 0, push, PendingIntent.FLAG_IMMUTABLE)
                     val noti = Notification.Builder(this, NOTI_CHANNEL_ID_INSTANT_MSG)
                             .setContentText("服务已在运行，无需再启动")
                             .setSmallIcon(R.drawable.fakerun_noti_icon)
@@ -135,7 +140,7 @@ class MockRun : Service() {
                     updateNotiText("就绪～")
                 } else {
                     val push = Intent(this, Home::class.java)
-                    val contentIntent = PendingIntent.getActivity(this, 0, push, 0)
+                    val contentIntent = PendingIntent.getActivity(this, 0, push, PendingIntent.FLAG_IMMUTABLE)
                     val noti = Notification.Builder(this, NOTI_CHANNEL_ID_INSTANT_MSG)
                             .setContentText("服务未在运行")
                             .setSmallIcon(R.drawable.fakerun_noti_icon)
@@ -193,7 +198,7 @@ class MockRun : Service() {
 
                     try {
                         updateLocation(tarCoord)
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
 
                     }
 

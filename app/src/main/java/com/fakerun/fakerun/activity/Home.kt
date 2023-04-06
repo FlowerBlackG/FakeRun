@@ -233,7 +233,7 @@ class Home : Activity() {
             callMockService(MockRun.MOCKRUN_ACTION_RUN_START)
             thread {
                 Thread.sleep(80)
-                reAuth()
+                // reAuth()
             }
         }
 

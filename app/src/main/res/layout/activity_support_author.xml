@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".activity.SupportAuthor">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@id/support.author.btn.container">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:id="@+id/auth.form">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#eee"
+                android:text="支持作者"
+                android:textSize="32sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#eee"
+                android:layout_marginTop="32dp"
+                android:text="跑吗是一款完全免费且代码开源的虚拟定位软件。\n跑吗项目维护者为无稳定收入的大学生。希望跑吗能够帮助到你，也希望你能为跑吗提供帮助。感激不尽~~"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:src="@drawable/combinedpay"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#eee"
+                android:text="截图保存，使用微信或支付宝扫码即可。\n\n点击下方按钮可查看二维码独立大图。"
+                android:textSize="18sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微信支付"
+                    android:textSize="14sp"
+                    android:textColor="#eee"
+                    android:background="@drawable/auth_btn_background"
+                    android:id="@+id/support.author.qrcode.wxpay" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="支付宝"
+                    android:textSize="14sp"
+                    android:textColor="#eee"
+                    android:background="@drawable/auth_btn_background"
+                    android:id="@+id/support.author.qrcode.alipay"
+                    android:layout_marginStart="8dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微信赞赏码"
+                    android:textSize="14sp"
+                    android:textColor="#eee"
+                    android:background="@drawable/auth_btn_background"
+                    android:id="@+id/support.author.qrcode.wxreward"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:id="@+id/support.author.btn.container">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👈  返回首页"
+            android:textSize="16sp"
+            android:textColor="#eee"
+            android:background="@drawable/auth_btn_background"
+            android:id="@+id/support.author.back"
+            android:padding="16dp"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💻 查看代码"
+            android:textSize="16sp"
+            android:textColor="#eee"
+            android:background="@drawable/auth_btn_background"
+            android:id="@+id/support.author.github"
+            android:layout_marginStart="16dp"
+            android:padding="16dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

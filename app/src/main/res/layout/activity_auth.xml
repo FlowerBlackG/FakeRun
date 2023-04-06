@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#fff"
-                android:text="身份验证"
+                android:text="欢迎使用"
                 android:textSize="48sp" />
 
             <EditText
@@ -37,11 +37,11 @@
                 android:gravity="center"
                 android:textSize="22sp"
                 android:textColor="#fff"
-                android:hint="进入码"
+                android:hint="进入码（随便填）"
                 android:textColorHint="#c666"
                 android:maxLines="2"
                 android:maxLength="36"
-                android:id="@+id/auth.key"/>
+                android:id="@+id/auth.key" />
 
             <Button
                 android:layout_width="match_parent"
@@ -97,6 +97,17 @@
                     android:id="@+id/auth.disclaimerShow"/>
             </RelativeLayout>
 
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="赞助作者"
+                android:layout_marginTop="16sp"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:background="@drawable/auth_btn_background"
+                android:id="@+id/auth.supportAuthor"/>
 
         </LinearLayout>
 
