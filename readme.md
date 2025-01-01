@@ -21,3 +21,7 @@
 
 
 <img src="readme-img/selmap.jpg" alt="selmap" style="zoom:50%;" />
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=FlowerBlackG/FakeRun&type=Date)](https://star-history.com/#FlowerBlackG/FakeRun&Date)
