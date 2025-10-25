@@ -32,10 +32,8 @@ class MockLocationProvider(name: String, context: Context) {
         val mockLocation = Location(providerName)
         mockLocation.latitude = lat
         mockLocation.longitude = lon
-        //mockLocation.altitude = 3.0
         mockLocation.altitude = 2.8 + ((920..1220).random() / 1000.0 - 1)
         mockLocation.time = System.currentTimeMillis()
-        //mockLocation.speed = 2.5F
         mockLocation.speed = 2.5F + ((780..1260).random() / 1000.0F - 1)
         mockLocation.bearing = 1F
         mockLocation.accuracy = 3F
