@@ -87,17 +87,6 @@ class Auth : Activity() {
         findViewById<TextView>(R.id.auth_version).text = versionInfoStr
     }
 
-    private val VIEW_LOADING = 0
-    private val VIEW_FORM = 1
-    private fun switchViews(views: Int) {
-        if (views == VIEW_FORM) {
-            loadingView.visibility = ProgressBar.GONE
-            formView.visibility = LinearLayout.VISIBLE
-        } else if (views == VIEW_LOADING) {
-            loadingView.visibility = ProgressBar.VISIBLE
-            formView.visibility = LinearLayout.INVISIBLE
-        }
-    }
 
     private fun requestLocationPermission() {
         if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
