@@ -19,12 +19,12 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.edit
+import androidx.core.net.toUri
 import com.fakerun.fakerun.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import java.net.URLDecoder
-import java.net.URLEncoder
 import kotlin.concurrent.thread
 
 class Auth : Activity() {
@@ -89,11 +89,11 @@ class Auth : Activity() {
 
 
     private fun requestLocationPermission() {
-        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            val perArr : Array<String> = Array(2) { "" }
-            perArr[0] = Manifest.permission.ACCESS_COARSE_LOCATION
-            perArr[1] = Manifest.permission.ACCESS_FINE_LOCATION
+        val coarseLocationGranted = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        val fineLocationGranted = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+        if (!coarseLocationGranted || !fineLocationGranted) {
+            val perArr = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(perArr, PERMISSION_REQUEST_LOCATION)
         }
     }
@@ -125,12 +125,10 @@ class Auth : Activity() {
                     }
                     .show()
 
-                sp.edit().putBoolean(POST_MSG_FIRED_KEY, true).apply()
+                sp.edit(commit = true) { putBoolean(POST_MSG_FIRED_KEY, true) }
 
             } else {
-
                 requirePostNotificationPermission()
-
             }
 
         }
@@ -158,32 +156,7 @@ class Auth : Activity() {
     }
 
     private val PERMISSION_REQUEST_LOCATION = 1
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
 
-
-    /**
-     * Encode a String with UTF-8 for better cloud storing
-     *
-     * @param str String to be encoded
-     *
-     * @return Encoded String
-     */
-    private fun defUrlEnc(str: String?): String {
-        return URLEncoder.encode(str, "UTF-8")
-    }
-
-    /**
-     * Decode an encoded String downloaded from the cloud with UTF-8
-     *
-     * @param str String to be decoded
-     *
-     * @return Decoded String
-     */
-    private fun defUrlDec(str: String?): String {
-        return URLDecoder.decode(str, "UTF-8")
-    }
 
     private fun checkUpdate() {
         val cloudApiRoot = "https://www.gardilily.com/fakeRun/api/"
@@ -205,15 +178,15 @@ class Auth : Activity() {
 
                 val resArr = result?.split("_div_")
                 runOnUiThread {
-                    var msg = "版本：${resArr!![2]}\n"
-                    msg += "时间：${resArr[3]}\n"
-                    msg += "说明：\n\n${resArr[5]}\n"
+                    val msg = "版本：${resArr!![2]}\n" +
+                            "时间：${resArr[3]}\n" +
+                            "说明：\n\n${resArr[5]}\n"
 
                     AlertDialog.Builder(this)
                             .setTitle("有新版本可用")
                             .setMessage(msg)
                             .setPositiveButton("更新") { _, _ ->
-                                val uri = Uri.parse(resArr[4])
+                                val uri = resArr[4].toUri()
                                 startActivity(Intent(Intent.ACTION_VIEW, uri))
                             }
                             .setNegativeButton("取消", null)
