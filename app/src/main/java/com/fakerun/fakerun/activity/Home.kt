@@ -231,10 +231,6 @@ class Home : Activity() {
             Toast.makeText(this, "正在启动...", Toast.LENGTH_SHORT).show()
             updateEditableParams()
             callMockService(MockRun.MOCKRUN_ACTION_RUN_START)
-            thread {
-                Thread.sleep(80)
-                // reAuth()
-            }
         }
 
         findViewById<Button>(R.id.home_switch_off).setOnClickListener {
@@ -342,44 +338,6 @@ class Home : Activity() {
         }
     }
 
-    private fun reAuth() {
-        val cloudApiRoot = "https://www.gardilily.com/fakeRun/api/"
-        thread {
-            var tarUrl = "${cloudApiRoot}auth.php"
-            tarUrl += "?ac_key=" + "B9D934C1D10F29B1C5201C84291133F4"
-            tarUrl += "&version=${packageManager.getPackageInfo(packageName, 0).longVersionCode}"
-            tarUrl += "&keycode=${defUrlEnc(sp.getString("keycode", "_null"))}"
-            tarUrl += "&device=${defUrlEnc(Build.BRAND + Build.MODEL)}"
-            val client = OkHttpClient()
-            val request: Request = Request.Builder()
-                    .url(tarUrl)
-                    .build()
-            val response: Response = client.newCall(request).execute()
-            if (response.code == 200) {
-                // success
-                val result = defUrlDec(response.body?.string())
-                val resInt = result.toInt()
-
-                if (resInt < 0) {
-                    callMockService(MockRun.MOCKRUN_ACTION_LIFE_DESTROY)
-                    runOnUiThread {
-                        // 验证失败
-                        Toast.makeText(this, "程序异常", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, Auth::class.java))
-                        finish()
-                    }
-                }
-            }
-            else {
-                callMockService(MockRun.MOCKRUN_ACTION_LIFE_DESTROY)
-                runOnUiThread {
-                    Toast.makeText(this, "网络异常", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Auth::class.java))
-                    finish()
-                }
-            }
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
