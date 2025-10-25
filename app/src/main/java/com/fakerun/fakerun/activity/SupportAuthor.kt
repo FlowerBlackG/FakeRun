@@ -2,15 +2,12 @@ package com.fakerun.fakerun.activity
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.core.net.toUri
 import com.fakerun.fakerun.R
 
 class SupportAuthor : Activity() {
@@ -22,7 +19,7 @@ class SupportAuthor : Activity() {
 
         findViewById<Button>(R.id.support_author_back).setOnClickListener { finish() }
         findViewById<Button>(R.id.support_author_github).setOnClickListener {
-            val uri = Uri.parse("https://github.com/FlowerBlackG/FakeRun")
+            val uri = "https://github.com/FlowerBlackG/FakeRun".toUri()
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
 
