@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -15,7 +14,11 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.text.SpannableStringBuilder
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.fakerun.fakerun.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -56,55 +59,10 @@ class Auth : Activity() {
 
     private fun initButtons() {
         findViewById<Button>(R.id.auth_confirm).setOnClickListener {
-            switchViews(VIEW_LOADING)
-            val str = keyView.text.toString()
-            if (str.isEmpty()) {
-                Toast.makeText(this, "请输入密钥", Toast.LENGTH_SHORT).show()
-                switchViews(VIEW_FORM)
-            } else {
-
-                val cloudApiRoot = "https://www.gardilily.com/fakeRun/api/"
-
-                thread {
-                    var tarUrl = "${cloudApiRoot}auth.php"
-                    tarUrl += "?ac_key=" + "B9D934C1D10F29B1C5201C84291133F4"
-                    tarUrl += "&version=${packageManager.getPackageInfo(packageName, 0).longVersionCode}"
-                    tarUrl += "&keycode=${defUrlEnc(str)}"
-                    tarUrl += "&device=${defUrlEnc(Build.BRAND + Build.MODEL)}"
-                    val client = OkHttpClient()
-                    val request: Request = Request.Builder()
-                            .url(tarUrl)
-                            .build()
-                    val response: Response = client.newCall(request).execute()
-                    if (response.code == 200) {
-                        // success
-                        val result = defUrlDec(response.body?.string())
-                        val resInt = result.toInt()
-
-                        if (resInt < 0) {
-                            runOnUiThread {
-                                Toast.makeText(this@Auth, "拒", Toast.LENGTH_SHORT).show()
-                                switchViews(VIEW_FORM)
-                            }
-                        } else if (resInt > 0) {
-                            sp.edit().putString("keycode", str).apply()
-                            runOnUiThread {
-                                val intent = Intent(this, Home::class.java)
-                                startActivity(intent)
-                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                                finish()
-                            }
-                        }
-                    }
-                    else {
-                        runOnUiThread {
-                            Toast.makeText(this@Auth, "网络异常", Toast.LENGTH_SHORT).show()
-                            switchViews(VIEW_FORM)
-                        }
-                    }
-                }
-
-            }
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
         }
 
         findViewById<Button>(R.id.auth_tutor_addMockPermission).setOnClickListener {
