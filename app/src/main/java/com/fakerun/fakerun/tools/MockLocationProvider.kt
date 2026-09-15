@@ -17,6 +17,12 @@ class MockLocationProvider(name: String, context: Context) {
     init {
         val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+        try {
+            lm.removeTestProvider(providerName)
+        } catch (_: Throwable) {
+            // ignore any error
+        }
+
         lm.addTestProvider(providerName, isNetwork, isGps, isNetwork, false, true, true, true, Criteria.POWER_LOW, Criteria.ACCURACY_COARSE)
         lm.setTestProviderEnabled(providerName, true)
     }
